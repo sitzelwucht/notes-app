@@ -26,10 +26,10 @@ document.querySelector('#addEntry').addEventListener('click', () => {
 })
 
 send.addEventListener('click', () => {
-    
     makeColorfulEntry()
     newContainer.classList.add('hidden')
     textArea.value = ''
+    location.reload()
     
 })
 
@@ -38,24 +38,30 @@ send.addEventListener('click', () => {
 data.forEach((item) => {
     const newEntryDiv = document.createElement('div')
     if (redBtn.classList.contains('selected')) {
-        newEntryDiv.style.backgroundColor = 'rgb(236, 195, 199)'
+        newEntryDiv.style.backgroundColor = 'rgb(240, 217, 217)'
     }
     else if (blueBtn.classList.contains('selected')) {
-        newEntryDiv.style.backgroundColor = 'rgb(204, 224, 247)'
+        newEntryDiv.style.backgroundColor = 'rgb(214, 227, 240)'
     }
     else if (yellowBtn.classList.contains('selected')) {
         newEntryDiv.style.backgroundColor = 'rgb(247, 240, 204)'
     }
     else if (greyBtn.classList.contains('selected')) {
-        newEntryDiv.style.backgroundColor = 'rgb(244, 244, 244)'
+        newEntryDiv.style.backgroundColor = 'rgb(80, 80, 80)'
     }
     else if (greenBtn.classList.contains('selected')) {
-        newEntryDiv.style.backgroundColor = 'rgb(199, 238, 205)'
+        newEntryDiv.style.backgroundColor = 'rgb(214, 240, 234)'
     }
     
     newEntryDiv.innerHTML = `<p>${item.text}</p> <br> <span>${item.time}</span>`
-    newEntryDiv.style.backgrouColor = item.color
+    newEntryDiv.style.backgroundColor = item.color
+    if(item.color == 'rgb(80, 80, 80)') {
+        newEntryDiv.style.color = 'white'
+        
+    }
+    
     document.querySelector('#notes-container').appendChild(newEntryDiv)
+    
   })
 
 
@@ -85,11 +91,11 @@ function createNew() {
     }
 
     // TODO: come up with a better way
-     createColorBtn(blueBtn, 'rgb(204, 224, 247)')
+     createColorBtn(blueBtn, 'rgb(214, 227, 240)')
      createColorBtn(yellowBtn, 'rgb(247, 240, 204)')
-     createColorBtn(redBtn, 'rgb(236, 195, 199)')
-     createColorBtn(greyBtn, 'rgb(244, 244, 244)')
-     createColorBtn(greenBtn, 'rgb(199, 238, 205)')
+     createColorBtn(redBtn, 'rgb(240, 217, 217)')
+     createColorBtn(greyBtn, 'rgb(80, 80, 80)')
+     createColorBtn(greenBtn, 'rgb(214, 240, 234)')
 
     // text area
     
@@ -114,35 +120,29 @@ function makeColorfulEntry() {
     let bg;
     const newEntryDiv = document.createElement('div')
     if (redBtn.classList.contains('selected')) {
-        newEntryDiv.style.backgroundColor = 'rgb(236, 195, 199)'
-        bg = 'rgb(236, 195, 199)'
+        newEntryDiv.style.backgroundColor = 'rgb(240, 217, 217)'
+        bg = 'rgb(240, 217, 217)'
     }
     else if (blueBtn.classList.contains('selected')) {
-        newEntryDiv.style.backgroundColor = 'rgb(204, 224, 247)'
-        bg = 'rgb(204, 224, 247)'
+        newEntryDiv.style.backgroundColor = 'rgb(214, 227, 240)'
+        bg = 'rgb(214, 227, 240)'
     }
     else if (yellowBtn.classList.contains('selected')) {
         newEntryDiv.style.backgroundColor = 'rgb(247, 240, 204)'
         bg =  'rgb(247, 240, 204)'
     }
     else if (greyBtn.classList.contains('selected')) {
-        newEntryDiv.style.backgroundColor = 'rgb(244, 244, 244)'
-        bg =  'rgb(244, 244, 244)'
+        newEntryDiv.style.backgroundColor = 'rgb(80, 80, 80)'
+        bg =  'rgb(80, 80, 80)'
     }
     else if (greenBtn.classList.contains('selected')) {
-        newEntryDiv.style.backgroundColor = 'rgb(199, 238, 205)'
-        bg =  'rgb(199, 238, 205)'
+        newEntryDiv.style.backgroundColor = 'rgb(214, 240, 234)'
+        bg =  'rgb(214, 240, 234)'
     }
-
-    newEntryDiv.innerHTML = `<p>${textArea.value}</p> <br> <span>${new Date().toLocaleString()}</span>`
-    document.querySelector('#notes-container').appendChild(newEntryDiv)
 
     storageArr.push({text: textArea.value, time: new Date().toLocaleString(), color: bg})
     localStorage.setItem('localItems', JSON.stringify(storageArr))    
 
     
 }
-
-
-
 
