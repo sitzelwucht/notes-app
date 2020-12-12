@@ -3,6 +3,7 @@ const newContainer = document.querySelector('#new-note-container')
 const send = document.createElement('button')
 const textArea = document.createElement('textarea')
 const writeEntry = document.createElement('div')  // opens the entry composing fields
+const clearAll = document.createElement('button')
 
 const blueBtn = document.createElement('button')
 const yellowBtn = document.createElement('button')
@@ -57,10 +58,17 @@ data.forEach((item) => {
     newEntryDiv.style.backgroundColor = item.color
     if(item.color == 'rgb(80, 80, 80)') {
         newEntryDiv.style.color = 'white'
-        
+
     }
     
     document.querySelector('#notes-container').appendChild(newEntryDiv)
+    clearAll.textContent = 'clear all'
+    clearAll.classList.add('clear')
+    document.querySelector('#clearDiv').appendChild(clearAll)
+    clearAll.addEventListener('click', () => {
+        localStorage.clear()
+        location.reload()
+    })
     
   })
 

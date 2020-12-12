@@ -26,7 +26,6 @@ header {
     flex-direction: row;
     justify-content: center; 
     background-color: rgb(206, 206, 206);
-    
 }
 
 textarea {
@@ -41,7 +40,7 @@ textarea {
 }
 textarea:focus {
     background-color: rgb(236, 236, 236);
-    color: rgb(141, 104, 139);
+    color: rgb(116, 105, 115);
 }
 
 span {
@@ -61,6 +60,7 @@ p {
 .wrapper {
     margin: 0 auto;
     background-color: rgb(223, 223, 223);
+    border: 1px rgb(53, 53, 53) solid;
     width: 60%;
     height: 100%;
     margin: 0 auto;
@@ -110,7 +110,7 @@ p {
     display: flex;
     flex-direction: column;
     background-color: rgb(230, 230, 230);
-    max-height: 400px;
+    max-height: 450px;
     place-self: center;
     overflow: auto;
     overflow-x: hidden;
@@ -118,10 +118,8 @@ p {
     margin: 1em 2em;
     font-family: 'Philosopher';
     color: rgb(88, 88, 88);
-    transition: all .5s ease-in-out
+    transition: all .5s ease-in-out;
 }
-
-
 
 #notes-container div:hover {
     box-shadow: 1px 7px 8px -8px rgba(0,0,0,0.75);
@@ -170,3 +168,16 @@ p {
 .hidden {
     display: none;
 }
+#clearDiv {
+    margin-top: 2em;
+    margin-bottom: 0;
+    text-align: center;
+}
+.clear{
+    border: none;
+    outline: none;
+    background-color: rgb(168, 168, 168);
+    color: white;
+    font-family: 'Open Sans';
+    cursor: pointer;
+   }
