@@ -1,6 +1,4 @@
 
-const button = document.querySelector('#addEntry')
-const container = document.querySelector('#notes-container')
 const newContainer = document.querySelector('#new-note-container')
 const send = document.createElement('button')
 const textArea = document.createElement('textarea')
@@ -15,20 +13,51 @@ const colorBar = document.createElement('div')
 let buttonArray = [blueBtn, yellowBtn, redBtn, greyBtn, greenBtn]
 
 
-let storageArr = localStorage.getItem('itemArray') ? 
-JSON.parse(localStorage.getItem('itemArray')) : []
+let storageArr = localStorage.getItem('localItems') ? 
+JSON.parse(localStorage.getItem('localItems')) : []
 
-const data = JSON.parse(localStorage.getItem('itemArray'))
+const data = JSON.parse(localStorage.getItem('localItems'))
 
 
-button.addEventListener('click', () => {
+
+
+document.querySelector('#addEntry').addEventListener('click', () => {
     createNew()
 })
 
 send.addEventListener('click', () => {
-    makeEntry()
+    
+    makeColorfulEntry()
+    newContainer.classList.add('hidden')
+    textArea.value = ''
     
 })
+
+
+
+data.forEach((item) => {
+    const newEntryDiv = document.createElement('div')
+    if (redBtn.classList.contains('selected')) {
+        newEntryDiv.style.backgroundColor = 'rgb(236, 195, 199)'
+    }
+    else if (blueBtn.classList.contains('selected')) {
+        newEntryDiv.style.backgroundColor = 'rgb(204, 224, 247)'
+    }
+    else if (yellowBtn.classList.contains('selected')) {
+        newEntryDiv.style.backgroundColor = 'rgb(247, 240, 204)'
+    }
+    else if (greyBtn.classList.contains('selected')) {
+        newEntryDiv.style.backgroundColor = 'rgb(244, 244, 244)'
+    }
+    else if (greenBtn.classList.contains('selected')) {
+        newEntryDiv.style.backgroundColor = 'rgb(199, 238, 205)'
+    }
+    
+    newEntryDiv.innerHTML = `<p>${item.text}</p> <br> <span>${item.time}</span>`
+    newEntryDiv.style.backgrouColor = item.color
+    document.querySelector('#notes-container').appendChild(newEntryDiv)
+  })
+
 
 // open composing view for writing an entry
 
@@ -39,7 +68,7 @@ function createNew() {
     colorBar.setAttribute('id', 'colorBarDiv')      // adds color options
     writeEntry.appendChild(colorBar)
 
-    function createColorBtn(name, color) {  
+    const createColorBtn = (name, color) => {  
         name.innerHTML = ' '
         name.style.backgroundColor = color
         name.setAttribute('class', 'colorButton')
@@ -72,44 +101,48 @@ function createNew() {
     send.setAttribute('id', 'send')
     send.textContent = 'Save'
     writeEntry.appendChild(send)
-
-
+    newContainer.classList.remove('hidden')
 
     
 }
 
+
+
 // creates a div for entry, adds styling
 
-const makeEntry = () => {
-
+function makeColorfulEntry() {
+    let bg;
     const newEntryDiv = document.createElement('div')
     if (redBtn.classList.contains('selected')) {
         newEntryDiv.style.backgroundColor = 'rgb(236, 195, 199)'
+        bg = 'rgb(236, 195, 199)'
     }
     else if (blueBtn.classList.contains('selected')) {
         newEntryDiv.style.backgroundColor = 'rgb(204, 224, 247)'
+        bg = 'rgb(204, 224, 247)'
     }
     else if (yellowBtn.classList.contains('selected')) {
         newEntryDiv.style.backgroundColor = 'rgb(247, 240, 204)'
+        bg =  'rgb(247, 240, 204)'
     }
     else if (greyBtn.classList.contains('selected')) {
         newEntryDiv.style.backgroundColor = 'rgb(244, 244, 244)'
+        bg =  'rgb(244, 244, 244)'
     }
     else if (greenBtn.classList.contains('selected')) {
         newEntryDiv.style.backgroundColor = 'rgb(199, 238, 205)'
+        bg =  'rgb(199, 238, 205)'
     }
 
     newEntryDiv.innerHTML = `<p>${textArea.value}</p> <br> <span>${new Date().toLocaleString()}</span>`
-    container.appendChild(newEntryDiv)
+    document.querySelector('#notes-container').appendChild(newEntryDiv)
 
+    storageArr.push({text: textArea.value, time: new Date().toLocaleString(), color: bg})
+    localStorage.setItem('localItems', JSON.stringify(storageArr))    
 
-    // storageArr.push(newEntryDiv.textContent)
-    // localStorage.setItem('itemArray', JSON.stringify(storageArr))
-
-    // data.forEach((item) => {
-    //     makeEntry()
-    // })
-
-    newContainer.removeChild(writeEntry)
-
+    
 }
+
+
+
+
