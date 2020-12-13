@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Open+Sans&family=Open+Sans+Condensed:wght@300&family=Quicksand:wght@300;700&family=Philosopher:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Quicksand:wght@300;700&family=Philosopher:wght@400;700&display=swap');
 
 body {
     font-family: 'Open Sans', sans-serif;
@@ -8,6 +8,7 @@ body {
 
 a {
     text-decoration: none;
+    color: grey;
 }
 
 h2 {
@@ -15,8 +16,8 @@ h2 {
     font-weight: 700;
     font-size: 2.6em;
     color: rgb(80, 66, 80);
-    padding: 1.1em;
-    letter-spacing: .4em;
+    padding: .6em;
+    letter-spacing: .3em;
 }
 
 header {
@@ -24,8 +25,13 @@ header {
     flex-direction: row;
     justify-content: center; 
     background-color: rgb(206, 206, 206);
+    align-items: center;
 }
 
+header div {
+    padding: 0;
+    margin: 2em 1em;
+}
 textarea {
     outline: none;
     width: 70%;
@@ -34,11 +40,13 @@ textarea {
     padding: 10px;
     box-sizing: border-box;
     border: none;
+    font-style: italic;
 
 }
 textarea:focus {
     background-color: rgb(236, 236, 236);
     color: rgb(116, 105, 115);
+    font-style: italic;
 }
 
 span {
@@ -51,7 +59,11 @@ span {
 p {
     margin: .3em .8em;
 }
-
+footer {
+    font-size: .8em;
+    color: rgb(110, 110, 110);
+    padding: .5em 1em
+}
 .wrapper {
     margin: 0 auto;
     background-color: rgb(223, 223, 223);
@@ -73,15 +85,15 @@ p {
     background-color: white;
     outline: none;
     border: none;
-    margin: 2em;
-    width: 80px;
-    height: 80px;
-    font-size: 1.5em;
+    width: 90px;
+    height: 90px;
+    font-size: 1.7em;
+    border-radius: 10px;
     box-shadow: -3px 4px 34px -6px rgba(68, 36, 36, 0.35);
 }
 
 #addEntry:hover {
-    background-color: rgb(122, 110, 122);
+    background-color: rgb(90, 80, 90);
     color: white;
 }
 
@@ -140,7 +152,7 @@ p {
 }
 
 #send {
-    border: 1px solid grey;
+    border: none;
     outline: none;
     height: 100%;
     width: 100px;
@@ -156,8 +168,9 @@ p {
     color: rgb(243, 243, 243);
 }
 
-.selected {
-    border: solid black 1px;
+.selected:after {
+    content: '✓';
+    color: grey
 }
 
 .hidden {
@@ -184,10 +197,10 @@ p {
     box-shadow: -3px 4px 34px -6px rgba(68, 36, 36, 0.35);
    }
 
-
    #delBtn {
        outline: none;
        border: none;
+       border-radius: 50%;
        color: grey;
        width: 20px;
        text-align: center;
@@ -198,3 +211,8 @@ p {
        background-color: rgb(71, 71, 71);
        color: white
    }
+
+   .purple{
+    filter: invert(23%) sepia(29%) saturate(486%) hue-rotate(256deg) brightness(90%) contrast(77%);
+}
+
