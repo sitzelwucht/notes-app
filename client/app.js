@@ -1,7 +1,9 @@
 
 const newContainer = document.querySelector('#new-note-container')
 const save = document.createElement('button')
-const textArea = document.createElement('textarea')
+
+const subjectArea = document.createElement('textarea')
+const entryArea = document.createElement('textarea')
 const writeEntry = document.createElement('div')  // opens the entry composing fields
 const clearAll = document.createElement('button')
 
@@ -19,7 +21,7 @@ JSON.parse(localStorage.getItem('localItems')) : []
 const data = JSON.parse(localStorage.getItem('localItems'))
 
 
-// EVENT LISTENER
+// EVENT LISTENERS
 
 document.querySelector('#addEntry').addEventListener('click', () => {
     composeNote()
@@ -28,7 +30,7 @@ document.querySelector('#addEntry').addEventListener('click', () => {
 save.addEventListener('click', () => {
     addEntryContent()
     newContainer.classList.add('hidden')
-    textArea.value = ''
+    entryArea.value = ''
     location.reload()
 })
 
@@ -68,10 +70,20 @@ function composeNote() {
      createColorBtn(greenBtn, 'rgb(214, 240, 234)')
 
     // text area creation
-    
-    textArea.placeholder = 'note goes here'
+    const textareaContainer = document.createElement('div')
+    textareaContainer.setAttribute('id', 'textareaContainer')
+    subjectArea.placeholder = 'subject'
+    subjectArea.setAttribute('id', 'subjectArea')
+
+    entryArea.placeholder = 'note goes here'
+    entryArea.setAttribute('id', 'entryArea')
+
     newContainer.appendChild(writeEntry)
-    writeEntry.appendChild(textArea)
+
+    writeEntry.appendChild(textareaContainer)
+    textareaContainer.appendChild(subjectArea)
+    textareaContainer.appendChild(entryArea)
+    
 
     // create button to save entry
     
@@ -102,7 +114,7 @@ function addEntryContent() {
         bg =  'rgb(214, 240, 234)'
     }
 
-    storageArr.push({text: textArea.value, time: new Date().toLocaleString(), color: bg})
+    storageArr.push({subject: subjectArea.value, text: entryArea.value, time: new Date().toLocaleString(), color: bg})
     localStorage.setItem('localItems', JSON.stringify(storageArr))    
 }
 
@@ -128,7 +140,7 @@ function createEntryList() {
             newEntryDiv.style.backgroundColor = 'rgb(214, 240, 234)'
         }
 
-        newEntryDiv.innerHTML = `<p>${storageArr[i].text}</p> <br> <span>${storageArr[i].time}</span>`
+        newEntryDiv.innerHTML = `<p><b><span>${storageArr[i].subject}</span></b></p><br><p>${storageArr[i].text}</p> <br> <span>${storageArr[i].time}</span>`
         newEntryDiv.style.backgroundColor = storageArr[i].color
         if(storageArr[i].color == 'rgb(80, 80, 80)') {
             newEntryDiv.style.color = 'white'

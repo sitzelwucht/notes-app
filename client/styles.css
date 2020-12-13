@@ -34,28 +34,23 @@ header div {
 }
 textarea {
     outline: none;
-    width: 70%;
-    height: 100%;
     resize: none;
-    padding: 10px;
     box-sizing: border-box;
     border: none;
     font-style: italic;
-
+    padding: 10px;
 }
 textarea:focus {
     background-color: rgb(236, 236, 236);
     color: rgb(116, 105, 115);
-    font-style: italic;
+    font-style: normal;
 }
-
 span {
     font-family: 'Quicksand';
     font-size: .8em;
     padding: .2em 1.8em;
     letter-spacing: .2em;
 }
-
 p {
     margin: .3em .8em;
 }
@@ -102,6 +97,22 @@ footer {
     color: white;
 }
 
+#textareaContainer {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 0;
+    padding: 0;
+}
+
+#subjectArea {
+    height: 35%;
+}
+
+#entryArea {
+    height: 65%
+}
+
 #notes-container {
     justify-content: space-evenly;
     display: flex;
@@ -129,11 +140,12 @@ footer {
     font-family: 'Philosopher';
     color: rgb(88, 88, 88);
     transition: all .3s ease-in-out;
+    position: relative;
 }
 
 #notes-container div:hover {
     box-shadow: 1px 7px 8px -8px rgba(0,0,0,0.75);
-    transform: scale(1.07);
+    transform: scale(1.05);
 }
 
 #writeNewNote {
@@ -197,22 +209,25 @@ footer {
     box-shadow: -3px 4px 34px -6px rgba(68, 36, 36, 0.35);
    }
 
-   #delBtn {
-       outline: none;
-       border: none;
-       border-radius: 50%;
-       color: grey;
-       width: 20px;
-       text-align: center;
-       padding: .1em;
+#delBtn {
+    position: absolute;
+    outline: none;
+    border: 1px solid rgb(165, 165, 165);
+    color: grey;
+    font-weight: bold;
+    width: 20px;
+    text-align: center;
+    padding: .1em;
+    left: 0;
+    top: 0;
 
-   }
-   #delBtn:hover {
-       background-color: rgb(71, 71, 71);
-       color: white
-   }
+}
+#delBtn:hover {
+    background-color: rgb(71, 71, 71);
+    color: white
+}
 
-   .purple{
+.purple{
     filter: invert(23%) sepia(29%) saturate(486%) hue-rotate(256deg) brightness(90%) contrast(77%);
 }
 
