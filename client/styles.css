@@ -1,6 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Open+Sans&family=Open+Sans+Condensed:wght@300&family=Quicksand:wght@300;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Philosopher:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Open+Sans&family=Open+Sans+Condensed:wght@300&family=Quicksand:wght@300;700&family=Philosopher:wght@400;700&display=swap');
 
 body {
     font-family: 'Open Sans', sans-serif;
@@ -9,7 +8,6 @@ body {
 
 a {
     text-decoration: none;
-
 }
 
 h2 {
@@ -47,10 +45,7 @@ span {
     font-family: 'Quicksand';
     font-size: .8em;
     padding: .2em 1.8em;
-    letter-spacing: .4em;
-}
-span:hover {
-    color: rgb(80,80,80)
+    letter-spacing: .2em;
 }
 
 p {
@@ -96,34 +91,37 @@ p {
 }
 
 #notes-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-evenly;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    flex-direction: row-reverse;
     background-color: rgb(255, 255, 255);
     grid-column-gap: 1em;
     grid-row-gap: 1em;
-    margin: 2.5em;
-    padding: 2.5em;
-
+    margin: 0 2.5em 2.5em 2.5em;
+    padding: 2em;
 }
 
 #notes-container div {
     display: flex;
     flex-direction: column;
     background-color: rgb(230, 230, 230);
-    max-height: 450px;
+    max-height: 275px;
+    max-width: 275px;
+    min-width: 150px;
     place-self: center;
     overflow: auto;
     overflow-x: hidden;
     padding: .2em;
-    margin: 1em 2em;
+    margin: .3em .1em;
     font-family: 'Philosopher';
     color: rgb(88, 88, 88);
-    transition: all .5s ease-in-out;
+    transition: all .3s ease-in-out;
 }
 
 #notes-container div:hover {
     box-shadow: 1px 7px 8px -8px rgba(0,0,0,0.75);
-    transform: scale(1.2);
+    transform: scale(1.07);
 }
 
 #writeNewNote {
@@ -134,14 +132,12 @@ p {
     margin-top: 2em;
 }
 
-
 #colorBarDiv {
     display: flex;
     flex-direction: column;
     height: 100%;
     align-items: stretch;
 }
-
 
 #send {
     border: 1px solid grey;
@@ -160,7 +156,6 @@ p {
     color: rgb(243, 243, 243);
 }
 
-
 .selected {
     border: solid black 1px;
 }
@@ -169,15 +164,37 @@ p {
     display: none;
 }
 #clearDiv {
-    margin-top: 2em;
-    margin-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0 1em;
     text-align: center;
+    padding: 1.5em;
 }
+
 .clear{
     border: none;
     outline: none;
+    height: 30px;
     background-color: rgb(168, 168, 168);
     color: white;
     font-family: 'Open Sans';
     cursor: pointer;
+    box-shadow: -3px 4px 34px -6px rgba(68, 36, 36, 0.35);
+   }
+
+
+   #delBtn {
+       outline: none;
+       border: none;
+       color: grey;
+       width: 20px;
+       text-align: center;
+       padding: .1em;
+
+   }
+   #delBtn:hover {
+       background-color: rgb(71, 71, 71);
+       color: white
    }

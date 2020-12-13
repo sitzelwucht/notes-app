@@ -20,8 +20,6 @@ JSON.parse(localStorage.getItem('localItems')) : []
 const data = JSON.parse(localStorage.getItem('localItems'))
 
 
-
-
 document.querySelector('#addEntry').addEventListener('click', () => {
     createNew()
 })
@@ -33,7 +31,6 @@ send.addEventListener('click', () => {
     location.reload()
     
 })
-
 
 
 data.forEach((item) => {
@@ -58,10 +55,15 @@ data.forEach((item) => {
     newEntryDiv.style.backgroundColor = item.color
     if(item.color == 'rgb(80, 80, 80)') {
         newEntryDiv.style.color = 'white'
-
     }
     
     document.querySelector('#notes-container').appendChild(newEntryDiv)
+
+    const delBtn = document.createElement('button')
+    delBtn.setAttribute('id', 'delBtn')
+    newEntryDiv.appendChild(delBtn)
+    delBtn.textContent = 'x'
+
     clearAll.textContent = 'clear all'
     clearAll.classList.add('clear')
     document.querySelector('#clearDiv').appendChild(clearAll)
@@ -128,23 +130,18 @@ function makeColorfulEntry() {
     let bg;
     const newEntryDiv = document.createElement('div')
     if (redBtn.classList.contains('selected')) {
-        newEntryDiv.style.backgroundColor = 'rgb(240, 217, 217)'
         bg = 'rgb(240, 217, 217)'
     }
     else if (blueBtn.classList.contains('selected')) {
-        newEntryDiv.style.backgroundColor = 'rgb(214, 227, 240)'
         bg = 'rgb(214, 227, 240)'
     }
     else if (yellowBtn.classList.contains('selected')) {
-        newEntryDiv.style.backgroundColor = 'rgb(247, 240, 204)'
         bg =  'rgb(247, 240, 204)'
     }
     else if (greyBtn.classList.contains('selected')) {
-        newEntryDiv.style.backgroundColor = 'rgb(80, 80, 80)'
         bg =  'rgb(80, 80, 80)'
     }
     else if (greenBtn.classList.contains('selected')) {
-        newEntryDiv.style.backgroundColor = 'rgb(214, 240, 234)'
         bg =  'rgb(214, 240, 234)'
     }
 
@@ -153,4 +150,5 @@ function makeColorfulEntry() {
 
     
 }
+
 
