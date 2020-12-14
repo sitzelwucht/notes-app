@@ -45,12 +45,7 @@ textarea:focus {
     color: rgb(116, 105, 115);
     font-style: normal;
 }
-span {
-    font-family: 'Quicksand';
-    font-size: .8em;
-    padding: .2em 1.8em;
-    letter-spacing: .2em;
-}
+
 p {
     margin: .3em .8em;
 }
@@ -143,6 +138,14 @@ footer {
     position: relative;
 }
 
+#notes-container div::-webkit-scrollbar {
+    width: .7em;
+  }
+
+#notes-container div::-webkit-scrollbar-thumb {
+    background-color: rgb(161, 161, 161);
+  }
+
 #notes-container div:hover {
     box-shadow: 1px 7px 8px -8px rgba(0,0,0,0.75);
     transform: scale(1.05);
@@ -212,7 +215,7 @@ footer {
 #delBtn {
     position: absolute;
     outline: none;
-    border: 1px solid rgb(165, 165, 165);
+    border: 1px solid rgb(196, 196, 196);
     color: grey;
     font-weight: bold;
     width: 20px;
@@ -231,3 +234,22 @@ footer {
     filter: invert(23%) sepia(29%) saturate(486%) hue-rotate(256deg) brightness(90%) contrast(77%);
 }
 
+#subjectEl {
+    font-family: 'Quicksand';
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: .1em;
+    font-size: .9em;
+    padding: .3em .6em;
+}
+
+#entryEl {
+    padding: .4em .6em;
+}
+#dateEl {
+    font-family: 'Quicksand';
+    font-size: .9em;
+    letter-spacing: .2em;
+    padding: .2em .6em;
+}

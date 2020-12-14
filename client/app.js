@@ -123,7 +123,19 @@ function addEntryContent() {
 function createEntryList() {
 
     for (let i = 0; i < data.length; i++) {
+
         const newEntryDiv = document.createElement('div')
+        const subjectEl = document.createElement('p')
+        const entryEl = document.createElement('p')
+        const dateEl = document.createElement('p')
+        subjectEl.setAttribute('id', 'subjectEl')
+        entryEl.setAttribute('id', 'entryEl')
+        dateEl.setAttribute('id', 'dateEl')
+        newEntryDiv.appendChild(subjectEl)
+        newEntryDiv.appendChild(entryEl)
+        newEntryDiv.appendChild(dateEl)
+
+
         if (redBtn.classList.contains('selected')) {
             newEntryDiv.style.backgroundColor = 'rgb(240, 217, 217)'
         }
@@ -140,7 +152,30 @@ function createEntryList() {
             newEntryDiv.style.backgroundColor = 'rgb(214, 240, 234)'
         }
 
-        newEntryDiv.innerHTML = `<p><b><span>${storageArr[i].subject}</span></b></p><br><p>${storageArr[i].text}</p> <br> <span>${storageArr[i].time}</span>`
+
+            // TODO find out htf this is done
+
+            if (storageArr[i].text.indexOf('http') != -1) {
+
+                let matches = storageArr[i].text.match(/\bhttps?:\/\/\S+/gi);
+                for (let i = 0; i < matches.length; i++) {
+    
+                    let aTag = document.createElement("a");
+                    aTag.href = matches[i];
+                    aTag.innerText = matches[i]
+                    console.log(aTag)
+                    
+                    storageArr[i].text = storageArr[i].text.replace(matches[i], aTag)
+   
+
+                }
+               
+            }
+    
+        subjectEl.innerText = storageArr[i].subject
+        entryEl.innerText = storageArr[i].text
+        dateEl.innerText = storageArr[i].time
+
         newEntryDiv.style.backgroundColor = storageArr[i].color
         if(storageArr[i].color == 'rgb(80, 80, 80)') {
             newEntryDiv.style.color = 'white'
@@ -156,7 +191,7 @@ function createEntryList() {
     document.querySelector('#clearDiv').appendChild(clearAll)
     clearAll.addEventListener('click', () => {
     localStorage.clear()
-    location.reload()
+    // location.reload()
     })
 }
 
