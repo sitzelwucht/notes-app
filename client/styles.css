@@ -11,6 +11,10 @@ a {
     color: grey;
 }
 
+a:hover{
+    color: rgb(85, 71, 85);
+}
+
 h2 {
     font-family: 'Philosopher';
     font-weight: 700;

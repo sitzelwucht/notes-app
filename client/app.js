@@ -153,27 +153,17 @@ function createEntryList() {
         }
 
 
-            // TODO find out htf this is done
+     
+        function hyperlinkMaker(text) {
+            let urlRegex = /(https?:\/\/[^\s]+)/g;
+            return text.replace(urlRegex, function(url) {
+            return `<a href="${url}" target="_blank">${url}</a>`;
+            })
+                
+        } 
 
-            if (storageArr[i].text.indexOf('http') != -1) {
-
-                let matches = storageArr[i].text.match(/\bhttps?:\/\/\S+/gi);
-                for (let i = 0; i < matches.length; i++) {
-    
-                    let aTag = document.createElement("a");
-                    aTag.href = matches[i];
-                    aTag.innerText = matches[i]
-                    console.log(aTag)
-                    
-                    storageArr[i].text = storageArr[i].text.replace(matches[i], aTag)
-   
-
-                }
-               
-            }
-    
         subjectEl.innerText = storageArr[i].subject
-        entryEl.innerText = storageArr[i].text
+        entryEl.innerHTML = hyperlinkMaker(storageArr[i].text)
         dateEl.innerText = storageArr[i].time
 
         newEntryDiv.style.backgroundColor = storageArr[i].color
