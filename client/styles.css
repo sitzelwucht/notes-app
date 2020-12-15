@@ -129,8 +129,8 @@ footer {
     flex-direction: column;
     background-color: rgb(230, 230, 230);
     max-height: 275px;
-    max-width: 275px;
-    min-width: 150px;
+    max-width: 290px;
+    min-width: 175px;
     place-self: center;
     overflow: auto;
     overflow-x: hidden;
@@ -140,6 +140,7 @@ footer {
     color: rgb(88, 88, 88);
     transition: all .3s ease-in-out;
     position: relative;
+    word-wrap: break-word;
 }
 
 #notes-container div::-webkit-scrollbar {
@@ -187,8 +188,15 @@ footer {
     color: rgb(243, 243, 243);
 }
 
+#send:after {
+    /* content: '✔' ; */
+    content: '⤑';
+    content: '⤵';
+    font-size: 2.2em;
+}
 .selected:after {
     content: '✓';
+    font-size: 1.2em;
     color: grey
 }
 
@@ -198,23 +206,13 @@ footer {
 #clearDiv {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
     margin: 0 1em;
     text-align: center;
-    padding: 1.5em;
+    padding: .7em 1.5em;
 }
 
-.clear{
-    border: none;
-    outline: none;
-    height: 30px;
-    background-color: rgb(168, 168, 168);
-    color: white;
-    font-family: 'Open Sans';
-    cursor: pointer;
-    box-shadow: -3px 4px 34px -6px rgba(68, 36, 36, 0.35);
-   }
 
 #delBtn {
     position: absolute;
@@ -222,7 +220,8 @@ footer {
     border: 1px solid rgb(196, 196, 196);
     color: grey;
     font-weight: bold;
-    width: 20px;
+    width: 26px;
+    height: 26px;
     text-align: center;
     padding: .1em;
     left: 0;
@@ -232,6 +231,28 @@ footer {
 #delBtn:hover {
     background-color: rgb(71, 71, 71);
     color: white
+}
+
+#editBtn {
+    position: absolute;
+    left: 0;
+    top: 26px;
+    cursor: not-allowed;
+    color: grey;
+    outline: none;
+    border:none;
+    width: 26px;
+    height: 26px;
+    padding: .1em;
+    border: 1px solid rgb(196, 196, 196);
+    font-size: 1.3em;
+    text-align: center;
+}
+
+
+#editBtn:hover {
+    background-color: rgb(71, 71, 71);
+    color: white;
 }
 
 .purple{
@@ -245,15 +266,34 @@ footer {
     text-align: center;
     letter-spacing: .1em;
     font-size: .9em;
-    padding: .3em .6em;
+    padding: .3em .8em;
+    margin: .5em 1.2em .5em 1.5em;
 }
 
 #entryEl {
     padding: .4em .6em;
+    margin: .5em .5em .5em 1.3em;
 }
 #dateEl {
     font-family: 'Quicksand';
     font-size: .9em;
     letter-spacing: .2em;
     padding: .2em .6em;
+    margin: .5em .5em .5em 1em;
 }
+
+#empty {
+    color: rgb(175, 175, 175);
+    font-size: 1.2em
+}
+
+#trash {
+    filter: invert(63%) sepia(2%) saturate(18%) hue-rotate(321deg) brightness(96%) contrast(93%);
+    cursor: pointer;
+    padding: .3em;
+}
+
+#trash:hover {
+    filter: invert(43%) sepia(0%) saturate(1%) hue-rotate(226deg) brightness(89%) contrast(83%);
+}
+

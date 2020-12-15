@@ -5,7 +5,6 @@ const save = document.createElement('button')
 const subjectArea = document.createElement('textarea')
 const entryArea = document.createElement('textarea')
 const writeEntry = document.createElement('div')  // opens the entry composing fields
-const clearAll = document.createElement('button')
 
 const blueBtn = document.createElement('button')
 const yellowBtn = document.createElement('button')
@@ -19,6 +18,12 @@ let storageArr = localStorage.getItem('localItems') ?
 JSON.parse(localStorage.getItem('localItems')) : []
 
 const data = JSON.parse(localStorage.getItem('localItems'))
+
+
+const empty = document.createElement('p')
+empty.setAttribute('id', 'empty')
+empty.innerHTML = 'No notes yet'
+document.querySelector('#notes-container').appendChild(empty)
 
 
 // EVENT LISTENERS
@@ -88,7 +93,6 @@ function composeNote() {
     // create button to save entry
     
     save.setAttribute('id', 'send')
-    save.textContent = 'Save'
     writeEntry.appendChild(save)
     newContainer.classList.remove('hidden')
 }
@@ -171,34 +175,44 @@ function createEntryList() {
             newEntryDiv.style.color = 'white'
             }
         document.querySelector('#notes-container').appendChild(newEntryDiv)
-        addDelBtn(newEntryDiv, i)
+        addBtns(newEntryDiv, i)
     }
 
     // 'clear all' button
-
-    clearAll.textContent = 'clear all'
-    clearAll.classList.add('clear')
-    document.querySelector('#clearDiv').appendChild(clearAll)
-    clearAll.addEventListener('click', () => {
-    localStorage.clear()
-    // location.reload()
+    document.getElementById('trash').classList.remove('hidden')
+    document.getElementById('trash').addEventListener('click', () => {
+        localStorage.clear()
+        location.reload()
     })
+
+    empty.classList.add('hidden')
 }
 
 // HELPER FUNCTIONS
 
- function addDelBtn(item, index) {
+ function addBtns(item, index) {
 
     const delBtn = document.createElement('button')
     delBtn.setAttribute('id', 'delBtn')
+    delBtn.setAttribute('title', 'delete note')
     item.appendChild(delBtn)
-    delBtn.textContent = 'x'
+    delBtn.textContent = '✕'
 
     delBtn.addEventListener('click', () => {
         item.parentElement.removeChild(item);
         removeFromLocalStrg(index)
     })
     
+    const editBtn = document.createElement('button')
+    editBtn.setAttribute('id', 'editBtn')
+    editBtn.setAttribute('title', 'edit note')
+    item.appendChild(editBtn)
+    editBtn.textContent = '✎'
+
+    editBtn.addEventListener('click', () => {
+        // editing stuff 
+        // change entryEl text to texarea for editing
+    })
   }
   
   // delete items based on index, remove empty items from array, returns updated array
