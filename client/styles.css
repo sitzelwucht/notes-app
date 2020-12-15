@@ -215,6 +215,7 @@ footer {
 
 
 #delBtn {
+    background-color: rgb(190, 190, 190);
     position: absolute;
     outline: none;
     border: 1px solid rgb(196, 196, 196);
@@ -234,10 +235,10 @@ footer {
 }
 
 #editBtn {
+    background-color: rgb(190, 190, 190);
     position: absolute;
     left: 0;
     top: 26px;
-    cursor: not-allowed;
     color: grey;
     outline: none;
     border:none;
@@ -253,6 +254,13 @@ footer {
 #editBtn:hover {
     background-color: rgb(71, 71, 71);
     color: white;
+}
+
+#saveEditBtn {
+    outline: none;
+    border: none;
+    background-color: rgb(122, 122, 122);
+    color: lightgrey
 }
 
 .purple{

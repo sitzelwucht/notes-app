@@ -19,33 +19,17 @@ JSON.parse(localStorage.getItem('localItems')) : []
 
 const data = JSON.parse(localStorage.getItem('localItems'))
 
-
 const empty = document.createElement('p')
 empty.setAttribute('id', 'empty')
 empty.innerHTML = 'No notes yet'
 document.querySelector('#notes-container').appendChild(empty)
 
 
-// EVENT LISTENERS
-
-document.querySelector('#addEntry').addEventListener('click', () => {
-    composeNote()
-})
-
-save.addEventListener('click', () => {
-    addEntryContent()
-    newContainer.classList.add('hidden')
-    entryArea.value = ''
-    location.reload()
-})
-
-createEntryList()
-
 // FUNCTIONS
 
 // open composing view for writing an entry
 
-function composeNote() {
+document.querySelector('#addEntry').addEventListener('click', function composeNote() {
     
     writeEntry.setAttribute('id', 'writeNewNote')
     colorBar.setAttribute('id', 'colorBarDiv')      // adds color options
@@ -95,7 +79,20 @@ function composeNote() {
     save.setAttribute('id', 'send')
     writeEntry.appendChild(save)
     newContainer.classList.remove('hidden')
-}
+
+    this.removeEventListener('click', composeNote)
+})
+
+
+save.addEventListener('click', () => {
+    addEntryContent()
+    newContainer.classList.add('hidden')
+    entryArea.value = ''
+    location.reload()
+})
+
+createEntryList()
+
 
 // add selected bg color, text content, add to storage array
 
@@ -176,16 +173,26 @@ function createEntryList() {
             }
         document.querySelector('#notes-container').appendChild(newEntryDiv)
         addBtns(newEntryDiv, i)
+    
     }
 
-    // 'clear all' button
-    document.getElementById('trash').classList.remove('hidden')
-    document.getElementById('trash').addEventListener('click', () => {
-        localStorage.clear()
-        location.reload()
-    })
 
+    
     empty.classList.add('hidden')
+
+    // 'clear all' button
+
+    document.getElementById('trash').classList.remove('hidden')
+    document.getElementById('trash').addEventListener('click', clearPage)
+
+    
+}
+
+
+if(storageArr.length === 1) {
+    delBtn.addEventListener('click', () => {
+        clearPage()
+    })
 }
 
 // HELPER FUNCTIONS
@@ -198,9 +205,11 @@ function createEntryList() {
     item.appendChild(delBtn)
     delBtn.textContent = '✕'
 
-    delBtn.addEventListener('click', () => {
-        item.parentElement.removeChild(item);
+    delBtn.addEventListener('click', function removeEntry() {
+        item.parentElement.removeChild(item)
         removeFromLocalStrg(index)
+        this.removeEventListener('click', removeEntry)
+        location.reload()
     })
     
     const editBtn = document.createElement('button')
@@ -209,11 +218,14 @@ function createEntryList() {
     item.appendChild(editBtn)
     editBtn.textContent = '✎'
 
-    editBtn.addEventListener('click', () => {
-        // editing stuff 
-        // change entryEl text to texarea for editing
-    })
-  }
+        editBtn.addEventListener('click', () => {
+            editEntry(item, editBtn)
+
+    }) 
+
+}
+    
+  
   
   // delete items based on index, remove empty items from array, returns updated array
   
@@ -230,6 +242,40 @@ function removeFromLocalStrg(index) {
       storageArr = storageArr.filter(item => item != null && item != '');
       localStorage.setItem('localItems', JSON.stringify(storageArr))
   }
+
+function clearPage() {
+    localStorage.clear()
+    location.reload()
+}
+
+function editEntry(item, button) {
+
+        item.children[1].contentEditable = true
+        item.children[1].style.fontFamily = 'monospace'
+        button.style.backgroundColor = 'rgb(71, 71, 71)'
+        button.style.color = 'white'
+        const saveEditBtn = document.createElement('button')
+        saveEditBtn.setAttribute('id', 'saveEditBtn')
+        saveEditBtn.innerHTML = 'save'
+        item.appendChild(saveEditBtn)
+
+        saveEditBtn.addEventListener('click', function saveEdit() {
+            item.children[1].contentEditable = false
+            item.children[1].style.fontFamily = 'Philosopher'
+            button.style.backgroundColor = 'rgb(190, 190, 190)'
+            button.style.color = 'grey'
+            this.removeEventListener('click', saveEdit)
+            saveEditBtn.remove(saveEditBtn)
+        })
+
+}
+
+        
+        
+        
+
+
+
 
 
 
