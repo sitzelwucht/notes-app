@@ -4,14 +4,14 @@ const save = document.createElement('button')
 
 const subjectArea = document.createElement('textarea')
 const entryArea = document.createElement('textarea')
-const writeEntry = document.createElement('div')  // opens the entry composing fields
 
+const colorBar = document.createElement('div')
 const blueBtn = document.createElement('button')
 const yellowBtn = document.createElement('button')
 const redBtn = document.createElement('button')
 const greyBtn = document.createElement('button')
 const greenBtn = document.createElement('button')
-const colorBar = document.createElement('div')
+
 let buttonArray = [blueBtn, yellowBtn, redBtn, greyBtn, greenBtn]
 
 let storageArr = localStorage.getItem('localItems') ? 
@@ -30,7 +30,7 @@ document.querySelector('#notes-container').appendChild(empty)
 // open composing view for writing an entry
 
 document.querySelector('#addEntry').addEventListener('click', function composeNote() {
-    
+    const writeEntry = document.createElement('div')  
     writeEntry.setAttribute('id', 'writeNewNote')
     colorBar.setAttribute('id', 'colorBarDiv')      // adds color options
     writeEntry.appendChild(colorBar)
@@ -46,12 +46,13 @@ document.querySelector('#addEntry').addEventListener('click', function composeNo
                     item.classList.add('selected')
                 }
                 else 
-                item.classList.remove('selected')
+                    item.classList.remove('selected')
             }
         })
     }
 
     // TODO: come up with a better way
+
      createColorBtn(blueBtn, 'rgb(214, 227, 240)')
      createColorBtn(yellowBtn, 'rgb(247, 240, 204)')
      createColorBtn(redBtn, 'rgb(240, 217, 217)')
@@ -184,7 +185,6 @@ function createEntryList() {
     
 }
 
-
 if(storageArr.length === 1) {
     delBtn.addEventListener('click', () => {
         clearPage()
@@ -208,7 +208,6 @@ if(storageArr.length === 1) {
         location.reload()
     })
 
-
 }
 
 
@@ -227,7 +226,7 @@ function addEditBtn(item, index) {
         item.children[1].style.fontFamily = 'monospace'
         const saveEditBtn = document.createElement('button')
         saveEditBtn.setAttribute('id', 'saveEditBtn')
-        saveEditBtn.innerHTML = 'save'
+        saveEditBtn.innerHTML = '✔'
         item.appendChild(saveEditBtn)
         this.removeEventListener('click', makeEditable)
         
@@ -238,6 +237,8 @@ function addEditBtn(item, index) {
             saveEditBtn.style.color = 'grey'
             item.classList.remove('zoom')
             storageArr[index].text = item.children[1].innerText
+            storageArr[index].time = `✎ ${new Date().toLocaleString()}`
+            location.reload()
             localStorage.setItem('localItems', JSON.stringify(storageArr))    
             this.removeEventListener('click', saveEdit)
             saveEditBtn.remove(saveEditBtn)
@@ -246,7 +247,6 @@ function addEditBtn(item, index) {
     }) 
 
 }
-   
 
   // delete items based on index, remove empty items from array, returns updated array
   
