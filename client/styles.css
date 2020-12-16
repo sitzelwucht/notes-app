@@ -138,7 +138,7 @@ footer {
     margin: .3em .1em;
     font-family: 'Philosopher';
     color: rgb(88, 88, 88);
-    transition: all .3s ease-in-out;
+    transition: all .5s ease-in-out;
     position: relative;
     word-wrap: break-word;
 }
@@ -153,7 +153,7 @@ footer {
 
 #notes-container div:hover {
     box-shadow: 1px 7px 8px -8px rgba(0,0,0,0.75);
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
 }
 
 #writeNewNote {
@@ -230,7 +230,7 @@ footer {
 
 }
 #delBtn:hover {
-    background-color: rgb(71, 71, 71);
+    background-color: rgb(163, 96, 96);
     color: white
 }
 
@@ -252,15 +252,15 @@ footer {
 
 
 #editBtn:hover {
-    background-color: rgb(71, 71, 71);
+    background-color: rgb(130, 170, 130);
     color: white;
 }
 
 #saveEditBtn {
     outline: none;
     border: none;
-    background-color: rgb(122, 122, 122);
-    color: lightgrey
+    background-color: rgb(172, 172, 172);
+    color: rgb(252, 252, 252)
 }
 
 .purple{
@@ -280,7 +280,7 @@ footer {
 
 #entryEl {
     padding: .4em .6em;
-    margin: .5em .5em .5em 1.3em;
+    margin: .5em .5em .5em 1.6em;
 }
 #dateEl {
     font-family: 'Quicksand';
@@ -305,3 +305,10 @@ footer {
     filter: invert(43%) sepia(0%) saturate(1%) hue-rotate(226deg) brightness(89%) contrast(83%);
 }
 
+.zoom {
+    transform: scale(1.2);
+}
+
+[contenteditable]:focus {
+    outline: 0px solid transparent;
+}

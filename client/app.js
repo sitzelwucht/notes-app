@@ -153,8 +153,6 @@ function createEntryList() {
             newEntryDiv.style.backgroundColor = 'rgb(214, 240, 234)'
         }
 
-
-     
         function hyperlinkMaker(text) {
             let urlRegex = /(https?:\/\/[^\s]+)/g;
             return text.replace(urlRegex, function(url) {
@@ -172,19 +170,17 @@ function createEntryList() {
             newEntryDiv.style.color = 'white'
             }
         document.querySelector('#notes-container').appendChild(newEntryDiv)
-        addBtns(newEntryDiv, i)
+        addDelBtn(newEntryDiv, i)
+        addEditBtn(newEntryDiv, i)
     
     }
 
-
-    
     empty.classList.add('hidden')
 
     // 'clear all' button
 
     document.getElementById('trash').classList.remove('hidden')
     document.getElementById('trash').addEventListener('click', clearPage)
-
     
 }
 
@@ -197,7 +193,7 @@ if(storageArr.length === 1) {
 
 // HELPER FUNCTIONS
 
- function addBtns(item, index) {
+ function addDelBtn(item, index) {
 
     const delBtn = document.createElement('button')
     delBtn.setAttribute('id', 'delBtn')
@@ -211,22 +207,47 @@ if(storageArr.length === 1) {
         this.removeEventListener('click', removeEntry)
         location.reload()
     })
-    
+
+
+}
+
+
+function addEditBtn(item, index) {
+
     const editBtn = document.createElement('button')
     editBtn.setAttribute('id', 'editBtn')
     editBtn.setAttribute('title', 'edit note')
     item.appendChild(editBtn)
     editBtn.textContent = '✎'
 
-        editBtn.addEventListener('click', () => {
-            editEntry(item, editBtn)
+    editBtn.addEventListener('click', function makeEditable() {
+        
+        item.classList.add('zoom')
+        item.children[1].contentEditable = true
+        item.children[1].style.fontFamily = 'monospace'
+        const saveEditBtn = document.createElement('button')
+        saveEditBtn.setAttribute('id', 'saveEditBtn')
+        saveEditBtn.innerHTML = 'save'
+        item.appendChild(saveEditBtn)
+        this.removeEventListener('click', makeEditable)
+        
+        saveEditBtn.addEventListener('click', function saveEdit() {
+            item.children[1].contentEditable = false
+            item.children[1].style.fontFamily = 'Philosopher'
+            saveEditBtn.style.backgroundColor = 'rgb(190, 190, 190)'
+            saveEditBtn.style.color = 'grey'
+            item.classList.remove('zoom')
+            storageArr[index].text = item.children[1].innerText
+            localStorage.setItem('localItems', JSON.stringify(storageArr))    
+            this.removeEventListener('click', saveEdit)
+            saveEditBtn.remove(saveEditBtn)
 
+        })
     }) 
 
 }
-    
-  
-  
+   
+
   // delete items based on index, remove empty items from array, returns updated array
   
 function removeFromLocalStrg(index) {
@@ -248,31 +269,6 @@ function clearPage() {
     location.reload()
 }
 
-function editEntry(item, button) {
-
-        item.children[1].contentEditable = true
-        item.children[1].style.fontFamily = 'monospace'
-        button.style.backgroundColor = 'rgb(71, 71, 71)'
-        button.style.color = 'white'
-        const saveEditBtn = document.createElement('button')
-        saveEditBtn.setAttribute('id', 'saveEditBtn')
-        saveEditBtn.innerHTML = 'save'
-        item.appendChild(saveEditBtn)
-
-        saveEditBtn.addEventListener('click', function saveEdit() {
-            item.children[1].contentEditable = false
-            item.children[1].style.fontFamily = 'Philosopher'
-            button.style.backgroundColor = 'rgb(190, 190, 190)'
-            button.style.color = 'grey'
-            this.removeEventListener('click', saveEdit)
-            saveEditBtn.remove(saveEditBtn)
-        })
-
-}
-
-        
-        
-        
 
 
 
